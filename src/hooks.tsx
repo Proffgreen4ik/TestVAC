@@ -1,4 +1,4 @@
-import { RefObject, useMemo, WheelEvent } from "react";
+import { RefObject, WheelEvent } from "react";
 
 export const useScrollHorizontal = <T extends HTMLElement = HTMLElement>(
   elementRef: RefObject<T>

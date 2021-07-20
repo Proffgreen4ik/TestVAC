@@ -1,4 +1,12 @@
+import { useRef } from "react";
+
 import { FilterIcon } from "../../assets/icons/FilterIcon";
+import OrderListCard from "./frames/OrderListCard";
+import { calcCount, calcPrice } from "../../utils";
+import { useScrollHorizontal } from "../../hooks";
+import { useAppSelector } from "../../app/hooks";
+import { ordersListSelector } from "./ordersListSlice";
+import { IOrdersList } from "./OrdersList.types";
 import {
   OrdersCardsWrapper,
   OrdersCardsWrapperInner,
@@ -6,16 +14,8 @@ import {
   OrdersListHeaderTitle,
   OrdersListWrapper,
 } from "./OrdersList.styled";
-import OrderListCard from "./OrderListCard";
-import { useGetOrdersQuery } from "../../services/orders";
-import { calcCount, calcPrice } from "../../utils";
-import { useScrollHorizontal } from "../../hooks";
-import { useRef } from "react";
-import { useAppSelector } from "../../app/hooks";
-import { ordersListSelector } from "./ordersListSlice";
 
-const OrdersList = () => {
-  const { data, error, isLoading } = useGetOrdersQuery("");
+const OrdersList = ({ orders }: IOrdersList) => {
   const scrollerRef = useRef<HTMLDivElement>(null!);
   const onScrollerWheel = useScrollHorizontal(scrollerRef);
   const { isOpened } = useAppSelector(ordersListSelector);
@@ -28,7 +28,7 @@ const OrdersList = () => {
       </OrdersListHeader>
       <OrdersCardsWrapper ref={scrollerRef} onWheel={onScrollerWheel}>
         <OrdersCardsWrapperInner>
-          {data?.map(({ id, number, date, goods, sale }) => (
+          {orders?.map(({ id, number, date, goods, sale }) => (
             <OrderListCard
               key={id}
               orderId={id}

@@ -11,10 +11,10 @@ import {
   ordersListSelector,
 } from "./features/OrdersList/ordersListSlice";
 import OrderCard from "./features/OrderCard";
-import { closeOrderCard } from "./features/OrdersList/OrderListCard/orderCardSlice";
+import { closeOrderCard } from "./features/OrdersList/frames/OrderListCard/orderCardSlice";
 
 function App() {
-  const { data, error, isLoading } = useGetOrdersQuery("");
+  const { data } = useGetOrdersQuery("");
   const { isOpened } = useAppSelector(ordersListSelector);
   const dispatch = useAppDispatch();
 
@@ -27,7 +27,7 @@ function App() {
     <AppBackdrop>
       <AppWrapper>
         <Burger onClick={toggleOrdersList} />
-        <OrdersList />
+        <OrdersList orders={data} />
         <OrderCard orders={data} />
       </AppWrapper>
     </AppBackdrop>

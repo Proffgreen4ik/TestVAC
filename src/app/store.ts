@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import orderCardSlice from "../features/OrdersList/OrderListCard/orderCardSlice";
+import orderCardSlice from "../features/OrdersList/frames/OrderListCard/orderCardSlice";
 import ordersListSlice from "../features/OrdersList/ordersListSlice";
 import { ordersApi } from "../services/orders";
 

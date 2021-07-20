@@ -1,7 +1,7 @@
-import moment from "moment";
-import { useAppDispatch } from "../../../app/hooks";
-import { closeOrdersList } from "../ordersListSlice";
+import { useAppDispatch } from "../../../../app/hooks";
+import { closeOrdersList } from "../../ordersListSlice";
 import { openOrderCard, selectActiveOrder } from "./orderCardSlice";
+import { IOrderListCard } from "./OrderListCard.types";
 import {
   CardWrapper,
   CardWrapperCounts,
@@ -11,7 +11,9 @@ import {
   CardWrapperHeaderPrice,
   CardWrapperHeaderTitle,
 } from "./OrderListCard.styled";
-import { IOrderListCard } from "./OrderListCard.types";
+
+import moment from "moment";
+
 const OrderListCard = ({
   number,
   date,
@@ -35,7 +37,11 @@ const OrderListCard = ({
         <CardWrapperHeaderPrice>{price} Р</CardWrapperHeaderPrice>
       </CardWrapperHeader>
       <CardWrapperDate>
-        {moment(date).add(1, "days").calendar()}
+        {moment(date).add(1, "days").calendar({
+          sameDay: "[Сегодня] HH:MM",
+          nextDay: "[Завтра] HH:MM",
+          sameElse: "DD.MM.YYYY",
+        })}
       </CardWrapperDate>
       <CardWrapperCounts>
         <CardWrapperCountsItem>товаров {count} шт.</CardWrapperCountsItem>
